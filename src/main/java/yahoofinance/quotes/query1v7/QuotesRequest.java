@@ -59,7 +59,8 @@ public abstract class QuotesRequest<T> {
 
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("symbols", this.symbols);
-
+        
+        params.put("crumb", CrumbManager.getCrumb());
         String url = YahooFinance.QUOTES_QUERY1V7_BASE_URL + "?" + Utils.getURLParameters(params);
 
         // Get JSON from Yahoo
@@ -69,7 +70,10 @@ public abstract class QuotesRequest<T> {
         RedirectableRequest redirectableRequest = new RedirectableRequest(request, 5);
         redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
-        URLConnection connection = redirectableRequest.openConnection();
+        Map<String, String> requestProperties = new HashMap<String, String>();
+        requestProperties.put("Cookie", CrumbManager.getCookie());
+
+        URLConnection connection = redirectableRequest.openConnection(requestProperties);
 
         InputStreamReader is = new InputStreamReader(connection.getInputStream());
         JsonNode node = objectMapper.readTree(is);
