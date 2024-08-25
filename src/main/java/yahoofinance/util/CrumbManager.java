@@ -1,4 +1,4 @@
-package yahoofinance.histquotes2;
+package yahoofinance.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,9 +46,10 @@ public class CrumbManager {
         redirectableRequest.setConnectTimeout(YahooFinance.CONNECTION_TIMEOUT);
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         
-       
-        URLConnection connection = redirectableRequest.openConnection();
-       
+        Map<String, String> requestProperties = new HashMap<String, String>();
+        requestProperties.put("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+        URLConnection connection = redirectableRequest.openConnection(requestProperties);
+
         for(String headerKey : connection.getHeaderFields().keySet()) {        	
             if("Set-Cookie".equalsIgnoreCase(headerKey)) {
                 for(String cookieField : connection.getHeaderFields().get(headerKey)) {                	
@@ -162,7 +163,8 @@ public class CrumbManager {
 
         Map<String, String> requestProperties = new HashMap<String, String>();
         requestProperties.put("Cookie", cookie);
-
+        requestProperties.put("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+  
         URLConnection crumbConnection = redirectableCrumbRequest.openConnection(requestProperties);
         InputStreamReader is = new InputStreamReader(crumbConnection.getInputStream());
         BufferedReader br = new BufferedReader(is);        

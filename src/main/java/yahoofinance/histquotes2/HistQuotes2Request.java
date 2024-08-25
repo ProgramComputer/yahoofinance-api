@@ -5,6 +5,7 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.util.RedirectableRequest;
+import yahoofinance.util.CrumbManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;

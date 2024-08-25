@@ -7,13 +7,14 @@ import org.slf4j.LoggerFactory;
 import yahoofinance.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.util.RedirectableRequest;
-
+import yahoofinance.util.CrumbManager;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public abstract class QuotesRequest<T> {
         redirectableRequest.setReadTimeout(YahooFinance.CONNECTION_TIMEOUT);
         Map<String, String> requestProperties = new HashMap<String, String>();
         requestProperties.put("Cookie", CrumbManager.getCookie());
-
+        requestProperties.put("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
         URLConnection connection = redirectableRequest.openConnection(requestProperties);
 
         InputStreamReader is = new InputStreamReader(connection.getInputStream());

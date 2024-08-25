@@ -3,6 +3,7 @@ package yahoofinance.histquotes2;
 import yahoofinance.Utils;
 import yahoofinance.YahooFinance;
 import yahoofinance.util.RedirectableRequest;
+import yahoofinance.util.CrumbManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
