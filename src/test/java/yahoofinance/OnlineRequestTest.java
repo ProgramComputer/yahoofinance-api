@@ -1,7 +1,6 @@
 package yahoofinance;
 
 import org.junit.Test;
-import yahoofinance.mock.MockedServersTest;
 import yahoofinance.quotes.fx.FxQuote;
 import yahoofinance.quotes.fx.FxSymbols;
 
@@ -19,8 +18,8 @@ public class OnlineRequestTest {
 
     @Test
     public void OnlineRequestTest() throws IOException {
-        Stock stock = YahooFinance.get("INTC");
-     assertEquals(stock.getStats().getSymbol(),"INTC");
+        Stock stock = YahooFinance.get("AAPL");
+     assertEquals(stock.getStats().getSymbol(),"AAPL");
 
     }
     }
